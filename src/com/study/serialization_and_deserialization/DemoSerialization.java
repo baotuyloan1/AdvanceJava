@@ -1,4 +1,4 @@
-package serialization_and_deserialization;
+package com.study.serialization_and_deserialization;
 
 import java.io.*;
 
@@ -8,7 +8,7 @@ import java.io.*;
  */
 // Serialization is a mechanism of converting the state of an object into a byte stream.
 //   Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory
-public class DemoSerialization implements Serializable{
+public class DemoSerialization implements Serializable {
 
     /**
      * The byte steam is created is platform independent.
@@ -60,12 +60,18 @@ public class DemoSerialization implements Serializable{
         DemoSerialization obj2 = null;
 
 //        Deserialization
-        try{
+        try {
             //reading the object from a file
             FileInputStream file = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(file);
+            // Method for deserialization of object
+            obj2 = (DemoSerialization) in.readObject();
+            System.out.println("a = " + obj2.a);
+            System.out.println("b = " + obj2.b);
 
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
